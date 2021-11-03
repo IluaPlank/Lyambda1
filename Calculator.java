@@ -10,8 +10,15 @@ public class Calculator {
     //минусуются 2 числа
     BinaryOperator<Integer> multiply = (x, y) -> x * y;
     //умножаются 2 числа
-    BinaryOperator<Integer> devide = (x, y) -> y > 0 ? x / y : 0 ;
-    //исправил devide , что б при y < 0 , не появлялась ошибка, теперь всегда будет писать 0
+    BinaryOperator<Integer> devide = (x, y) ->  {
+        try {
+            return x / y;
+        } catch (ArithmeticException e) {
+            System.out.println("Деление на ноль");
+        }
+        return 0;
+    };
+    //исправил devide , что б при y < 0 , не появлялась ошибка, теперь всегда будет уведомлять об делении на 0
     //BinaryOperator<Integer> devide = (x, y) -> x / y;
     // делятся 2 числа(выражение до исправления)
     UnaryOperator<Integer> pow = x -> x * x;
